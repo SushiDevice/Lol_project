@@ -1,19 +1,14 @@
 from fastapi import FastAPI
 
-from routers import champions
+from app.routers import pokemon
 
 app = FastAPI()
 
-base_url = ""
+base_url = "https://pokeapi.co/api/v2/"
 
-app.include_router(champions.router)
+app.include_router(pokemon.router)
 
 @app.get("/")
 async def root():
-    return {"message": "My last message",
-            "name": "Waosers"}
-
-@app.get("/lol")
-async def rt():
     return {"message": "My last message",
             "name": "Waosers"}
