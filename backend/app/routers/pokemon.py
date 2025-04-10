@@ -18,7 +18,9 @@ async def collect(name: str, shChance: int = rd.randint(1, 10)):
     response = {
         "name": pokemon.name,
         "sprite": pokemon.sprites.front_default,
+        "message": ""
     }
     if shChance == 1:
         response["shiny"] = pokemon.sprites.front_shiny
+        response["message"] = "¡Congratulations! You found a shiny Pokémon!"
     return response

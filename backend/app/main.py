@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-
-from app.routers import pokemon
+from routers import pokemon
 
 app = FastAPI()
 
