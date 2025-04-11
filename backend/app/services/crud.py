@@ -1,6 +1,7 @@
 from ..db import models
 from ..db.connection import engine
-from sqlmodel import Session, select
+from sqlmodel import Session, select, Field
+from typing import Optional
 
 def create_user(name: str) -> None:
     with Session(engine) as session:
@@ -24,9 +25,18 @@ def get_user(id: int) -> models.users:
         result = results.first()
         return result
 
+# a single pokemon
 def get_pokemon(name: str) -> models.pokemon:
     with Session(engine) as session:
         stmt = select(models.pokemon).where(models.pokemon.name == name)
         results = session.exec(stmt)
         result = results.first()
+        return result
+    
+def get_some(offset: Optional[int] = Field(default = 0),
+              limit: Optional[int] = Field(default = 10) ) -> models.pokemon:
+    with Session(engine) as session:
+        stmt = select(models.pokemon).limit(limit).offset(offset)
+        results = session.exec(stmt)
+        result = results.all()
         return result

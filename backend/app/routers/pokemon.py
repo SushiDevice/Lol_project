@@ -8,11 +8,11 @@ router = APIRouter(
     responses= {404: {"Description": "not found"}}
 )
 
-@router.get("/")
-async def showAll(show: int = 10):
-    pokemons = pb.APIResource("pokemon")
-    
-    return {"message": "hello"}
+@router.get("/pokemons")
+async def showSome():
+    pokemon = pb.pokemon("raichu")
+    name = pokemon.name
+    return name
 
 @router.get("/{name}")
 async def collect(name: str, shChance: int = rd.randint(1, 3)):
@@ -28,3 +28,5 @@ async def collect(name: str, shChance: int = rd.randint(1, 3)):
         response["shiny"] = True
         response["message"] = "¡Shiny pokemon!"
     return response
+
+#first should i poblate de database
