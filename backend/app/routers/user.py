@@ -1,14 +1,23 @@
 from fastapi import APIRouter
-from models import 
+from app.db import models
+from app.services import crud
 
-#aka user
 router = APIRouter(
     prefix="/user",
     tags=["user"],
     responses= {404: {"Description": "not found"}}
 )
 
+#First test this
 @router.get("/{user_id}")
-def get_user(user_id: int):
+async def get_user(user_id: int) -> models.users:
+    user = crud.get_user(user_id)
+    if user is None:
+        return {"message": "User not found"}
+    return user
 
-    return {"user_id": user_id}
+@router.post("/create_user")
+async def new_user(username: str) -> None:
+    crud.create_user(username)
+    
+    
