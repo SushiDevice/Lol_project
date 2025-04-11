@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from models import 
 
 #aka user
 router = APIRouter(
@@ -9,7 +10,5 @@ router = APIRouter(
 
 @router.get("/{user_id}")
 def get_user(user_id: int):
-    """
-    Get user by id
-    """
+
     return {"user_id": user_id}
